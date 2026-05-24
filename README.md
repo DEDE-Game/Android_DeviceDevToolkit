@@ -20,7 +20,7 @@
 *   **中文**：一键隐藏并锁死系统自带的鼠标光标。用来测试光标彻底消失后，手指摸屏是否能恢复正常，同时在下方实时接收高精度的鼠标位移数据。
 *   **English**: *Hides and locks the system cursor. Used to test if touchscreen input is restored when the cursor is invisible, while outputting relative mouse movement coordinates.*
 
-### 2. 物理霸占 / Linux Evdev Grab (内核层数据探针)
+### 2. 硬件读取 / Linux Evdev Grab (内核层数据探针)
 *   **中文**：利用 Shizuku 自动找出鼠标底层对应的物理路径（如 `/dev/input/event9`），测试从 Linux 内核驱动中直接读取最底层的光学位移信号（`EV_REL`）。
 *   **English**: *Resolves the mouse driver path and attempts to capture raw low-latency relative coordinates directly from the Linux kernel event nodes.*
 
