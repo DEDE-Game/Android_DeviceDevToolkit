@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- 添加这一行权限声明 -->
+    <!-- 突破 Android 11+ 包名可见性限制，允许探测真正的 Shizuku 服务进程 -->
+    <queries>
+        <package android:name="moe.shizuku.privileged.api" />
+        <package android:name="dev.rikka.shizuku" />
+    </queries>
+
+    <!-- 声明 Shizuku 通信所必需的底层权限 -->
     <uses-permission android:name="moe.shizuku.manager.permission.API_V23" />
 
     <application
@@ -14,6 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DevAndroidKit">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -21,10 +28,20 @@
             android:theme="@style/Theme.DevAndroidKit">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 关键修复：强行显式声明并导出通信 Provider，解除高版本跨进程安全封锁 -->
+        <provider
+            android:name="rikka.shizuku.ShizukuProvider"
+            android:authorities="${applicationId}.shizuku"
+            android:multiprocess="false"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.INTERACT_ACROSS_USERS_FULL"
+            tools:replace="android:authorities,android:exported" />
+
     </application>
 
 </manifest>

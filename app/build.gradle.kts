@@ -5,9 +5,7 @@ plugins {
 
 android {
     namespace = "com.conda.devandroidkit"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36 // 规范化写法
 
     defaultConfig {
         applicationId = "com.conda.devandroidkit"
